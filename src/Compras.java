@@ -132,17 +132,53 @@ public class Compras {
     public static void main(String[] args) {
         Compras compras = new Compras();
         compras.conecta();
-        compras.consulta("Producto");
-        String campos[] = {"idProducto", "nombre", "descripcion", "precioUnitario", "existencias", "idCategoriaProducto"};
-        String valores[] = {"3", "Escultura de perro azteca", "Escultura en cobre del clásico perro azteca", "250.15", "999", "1"};
-        compras.inserta("Producto", campos, valores);
-        compras.consulta("Producto");
-        campos = new String[]{"idProducto", "nombre", "descripcion", "precioUnitario"};
-        valores = new String[]{"3", "Escultura en miniatura de perro azteca", "Escultura mini en bronce del clásico perro azteca", "295.85"};
-        compras.actualiza("Producto", campos, valores, "3");
-        compras.consulta("Producto");
-        compras.elimina("Producto", "idProducto", "3");
-        compras.consulta("Producto");
+        compras.consulta("fabricante");
+        System.out.println("------------------------------------------------------------\n\n");
+        
+        String camposFabricante[] = {"idFabricante","nombre","direccion","telefono","email","paginaWeb","contacto","RFC"};
+        String valoresFabricante[] = {"1","Troncoso","Naucalpan, Mex", "55555555","troncoso@mail.com","troncoso.com","Juan Lopez","AADS981004KU"};  
+        String valoresFabricante2[] = {"2","IKEA","CDMX", "55111111","famsa@mail.com","famsa.com","Pedro Perez","PPDS901107AF"}; 
+        String valoresFabricante3[] = {"3","Casa de las lomas","Tlalnepantla", "55773355","casa@mail.com","casadelaslomas.com","Jose Juarez","JJDS901107AF"}; 
+        
+        compras.inserta("fabricante", camposFabricante, valoresFabricante); 
+        compras.inserta("fabricante", camposFabricante, valoresFabricante2);
+        compras.inserta("fabricante", camposFabricante, valoresFabricante3);
+        compras.consulta("fabricante");
+        System.out.println("------------------------------------------------------------\n\n");
+        
+        String camposCategoria[] = {"idCategoriaProducto","nombre","descripcion"};
+        String valoresCategoria[] = {"1","Salas","Asientos de 3 piezas, distintos diseños"};          
+        String valoresCategoria2[] = {"2","Comedores","Juego de sillas y mesa"};  
+        String valoresCategoria3[] = {"3","Camas","Base para cama"};  
+        
+        compras.inserta("categoriaproducto", camposCategoria, valoresCategoria); 
+        compras.inserta("categoriaproducto", camposCategoria, valoresCategoria2);
+        compras.inserta("categoriaproducto", camposCategoria, valoresCategoria3);
+        
+        compras.consulta("categoriaproducto");
+        System.out.println("------------------------------------------------------------\n\n");
+        
+        compras.elimina("fabricante","idFabricante" , "1");
+        compras.elimina("fabricante","idFabricante" , "2");
+        compras.elimina("fabricante","idFabricante" , "3");
+        
+        compras.elimina("categoriaproducto","idCategoriaProducto" , "1");
+        compras.elimina("categoriaproducto","idCategoriaProducto" , "2");
+        compras.elimina("categoriaproducto","idCategoriaProducto" , "3");
+//        compras.consulta("Producto");
+//        String campos[] = {"idProducto", "nombre", "descripcion", "precioUnitario", "existencias", "idCategoriaProducto"};
+//        String valores[] = {"3", "Escultura de perro azteca", "Escultura en cobre del clásico perro azteca", "250.15", "999", "1"};
+//        compras.inserta("Producto", campos, valores);
+//        compras.consulta("Producto");
+//        campos = new String[]{"idProducto", "nombre", "descripcion", "precioUnitario"};
+//        valores = new String[]{"3", "Escultura en miniatura de perro azteca", "Escultura mini en bronce del clásico perro azteca", "295.85"};
+//        compras.actualiza("Producto", campos, valores, "3");
+//        compras.consulta("Producto");
+//        compras.elimina("Producto", "idProducto", "3");
+//        compras.consulta("Producto");
         compras.cierra();
+        
+        
+        
     }    
 }
