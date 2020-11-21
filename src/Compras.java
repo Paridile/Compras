@@ -133,7 +133,7 @@ public class Compras {
         Compras compras = new Compras();
         compras.conecta();
         compras.consulta("fabricante");
-        System.out.println("------------------------------------------------------------\n\n");
+        System.out.println("------------------------------------------------------------\n");
         
         String camposFabricante[] = {"idFabricante","nombre","direccion","telefono","email","paginaWeb","contacto","RFC"};
         String valoresFabricante[] = {"1","Troncoso","Naucalpan, Mex", "55555555","troncoso@mail.com","troncoso.com","Juan Lopez","AADS981004KU"};  
@@ -144,7 +144,7 @@ public class Compras {
         compras.inserta("fabricante", camposFabricante, valoresFabricante2);
         compras.inserta("fabricante", camposFabricante, valoresFabricante3);
         compras.consulta("fabricante");
-        System.out.println("------------------------------------------------------------\n\n");
+        System.out.println("------------------------------------------------------------\n");
         
         String camposCategoria[] = {"idCategoriaProducto","nombre","descripcion"};
         String valoresCategoria[] = {"1","Salas","Asientos de 3 piezas, distintos diseños"};          
@@ -156,7 +156,25 @@ public class Compras {
         compras.inserta("categoriaproducto", camposCategoria, valoresCategoria3);
         
         compras.consulta("categoriaproducto");
-        System.out.println("------------------------------------------------------------\n\n");
+        System.out.println("------------------------------------------------------------\n");   
+                        
+        String camposProducto[] = {"idProducto","nombre","descripcion","precioUnitario","existencias","idCategoriaProducto"};
+        String valoresProducto[]  = {"1","Sala modular kalia azul","Sala esquinera de estilo contemporáneo, 2 sillones","22000","4","1"};          
+        String valoresProducto2[] = {"2","Sala derby new marfil","Sala Tapizada en piel natural","44000","6","1"};  
+        String valoresProducto3[] = {"3","Antecomedor capuccino","Moderno antecomedor, mesa con cubierta de cristal","13200","2","2"}; 
+        String valoresProducto4[] = {"4","Comedor oleg nogal","Comedor estilo nórdico, fabricado en madera de pino","25400","5","2"};          
+        String valoresProducto5[] = {"5","Cama Nuria gris","King size, madera","23000","1","3"};
+        String valoresProducto6[] = {"6","Cama odisey velvet","King size, madera, chapa natural","15600","2","3"}; 
+        
+        compras.inserta("producto", camposProducto, valoresProducto); 
+        compras.inserta("producto", camposProducto, valoresProducto2);
+        compras.inserta("producto", camposProducto, valoresProducto3);
+        compras.inserta("producto", camposProducto, valoresProducto4);
+        compras.inserta("producto", camposProducto, valoresProducto5);
+        compras.inserta("producto", camposProducto, valoresProducto6);
+        
+        compras.consulta("producto");
+        System.out.println("------------------------------------------------------------\n");  
         
         compras.elimina("fabricante","idFabricante" , "1");
         compras.elimina("fabricante","idFabricante" , "2");
@@ -164,7 +182,15 @@ public class Compras {
         
         compras.elimina("categoriaproducto","idCategoriaProducto" , "1");
         compras.elimina("categoriaproducto","idCategoriaProducto" , "2");
-        compras.elimina("categoriaproducto","idCategoriaProducto" , "3");
+        compras.elimina("categoriaproducto","idCategoriaProducto" , "3");   
+        
+        compras.elimina("producto","idProducto" , "1");
+        compras.elimina("producto","idProducto" , "2");
+        compras.elimina("producto","idProducto" , "3");
+        compras.elimina("producto","idProducto" , "4");
+        compras.elimina("producto","idProducto" , "5");
+        compras.elimina("producto","idProducto" , "6");
+        
 //        compras.consulta("Producto");
 //        String campos[] = {"idProducto", "nombre", "descripcion", "precioUnitario", "existencias", "idCategoriaProducto"};
 //        String valores[] = {"3", "Escultura de perro azteca", "Escultura en cobre del clásico perro azteca", "250.15", "999", "1"};
