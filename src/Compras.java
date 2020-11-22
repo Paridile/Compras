@@ -176,6 +176,18 @@ public class Compras {
         compras.consulta("producto");
         System.out.println("------------------------------------------------------------\n");  
         
+        String valoresProductomod[]   = {"1","Sala bari rojo","Sala esquinera de estilo contemporáneo, 2 sillones","20000","2","1"}; 
+        String valoresProductomod2[]  = {"5","Cama Nuria verde","Matrimonial, madera","10000","2","3"}; 
+        compras.actualiza("Producto", camposProducto, valoresProductomod, "1");
+        compras.actualiza("Producto", camposProducto, valoresProductomod2, "5");
+        compras.consulta("producto");
+        System.out.println("------------------------------------------------------------\n"); 
+        
+        compras.elimina("producto","idProducto" , "1");
+        compras.elimina("producto","idProducto" , "3");        
+        compras.consulta("producto");
+        System.out.println("------------------------------------------------------------\n"); 
+        
         compras.elimina("fabricante","idFabricante" , "1");
         compras.elimina("fabricante","idFabricante" , "2");
         compras.elimina("fabricante","idFabricante" , "3");
@@ -190,6 +202,9 @@ public class Compras {
         compras.elimina("producto","idProducto" , "4");
         compras.elimina("producto","idProducto" , "5");
         compras.elimina("producto","idProducto" , "6");
+        
+        
+        
         
 //        compras.consulta("Producto");
 //        String campos[] = {"idProducto", "nombre", "descripcion", "precioUnitario", "existencias", "idCategoriaProducto"};
