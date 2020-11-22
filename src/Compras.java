@@ -187,6 +187,22 @@ public class Compras {
         compras.elimina("producto","idProducto" , "3");        
         compras.consulta("producto");
         System.out.println("------------------------------------------------------------\n"); 
+                
+        String camposFabricanteProducto[]  = {"idFabricante","idProducto"}; 
+        String valoresFabricanteProducto[]   = {"1","2"}; 
+        String valoresFabricanteProducto2[]  = {"2","4"}; 
+        String valoresFabricanteProducto3[]  = {"3","5"}; 
+        String valoresFabricanteProducto4[]  = {"1","6"}; 
+        compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto);
+        compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto2);
+        compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto3);
+        compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto4);
+        compras.consulta("fabricanteproducto");
+        System.out.println("------------------------------------------------------------\n"); 
+        
+        compras.elimina("fabricanteproducto","idFabricante" , "1");
+        compras.elimina("fabricanteproducto","idFabricante" , "2");
+        compras.elimina("fabricanteproducto","idFabricante" , "3");
         
         compras.elimina("fabricante","idFabricante" , "1");
         compras.elimina("fabricante","idFabricante" , "2");
