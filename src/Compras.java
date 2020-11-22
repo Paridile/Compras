@@ -132,8 +132,6 @@ public class Compras {
     public static void main(String[] args) {
         Compras compras = new Compras();
         compras.conecta();
-        compras.consulta("fabricante");
-        System.out.println("------------------------------------------------------------\n");
         
         String camposFabricante[] = {"idFabricante","nombre","direccion","telefono","email","paginaWeb","contacto","RFC"};
         String valoresFabricante[] = {"1","Troncoso","Naucalpan, Mex", "55555555","troncoso@mail.com","troncoso.com","Juan Lopez","AADS981004KU"};  
@@ -200,9 +198,20 @@ public class Compras {
         compras.consulta("fabricanteproducto");
         System.out.println("------------------------------------------------------------\n"); 
         
+        String camposCliente[]  = {"idCliente","nombreCompleto","RFC","telefono","direccion","email"};
+        String valoresCliente[]   = {"1","Gustavo R. Vidriales Mireles","G9BGA996933","5534874587","Privada Pamo No. 287","gustavo@mail.com"};
+        String valoresCliente2[]  = {"2","Ezequias Mendoza Martín","A5GGE986933","5535745335","Gorchs No. 345","mendoza@mail.com"};
+        compras.inserta("cliente", camposCliente, valoresCliente);
+        compras.inserta("cliente", camposCliente, valoresCliente2);
+        compras.consulta("cliente");
+        System.out.println("------------------------------------------------------------\n"); 
+        
         compras.elimina("fabricanteproducto","idFabricante" , "1");
         compras.elimina("fabricanteproducto","idFabricante" , "2");
         compras.elimina("fabricanteproducto","idFabricante" , "3");
+        
+        compras.elimina("cliente","idCliente" , "1");
+        compras.elimina("cliente","idCliente" , "2");
         
         compras.elimina("fabricante","idFabricante" , "1");
         compras.elimina("fabricante","idFabricante" , "2");
