@@ -12,6 +12,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 /**
  *
@@ -62,6 +66,49 @@ public class Compras {
             System.err.println(ex.getMessage());
         }        
     }
+    
+        public void consultaCompra(String id) {
+        int i;
+        try {
+            System.out.println("\nCompras del cliente " + id);
+            ps = connection.prepareStatement("SELECT * FROM compra WHERE idCliente = " + id);
+            rs = ps.executeQuery();
+            System.out.println("Registros almacenados en la tabla: compra");            
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for(i = 1; i <= columnCount; i++ ) {
+                System.out.print(rsmd.getColumnName(i) + "\t");
+            }
+            System.out.println("");            
+            while(rs.next()) {
+                for(i = 1; i <= columnCount; i++ ) {
+                    System.out.print(rs.getString(i) + "\t");
+                }
+                System.out.println("");
+            }
+            System.out.println("------------------------------------------------------------\n"); 
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar registros de la tabla compra");
+            System.err.println(ex.getMessage());
+        }        
+    }
+
+    public String consultaPrecio(String idProducto) {
+        int i;
+        String precio = "1";
+        try {
+            ps = connection.prepareStatement("SELECT precioUnitario FROM producto WHERE idProducto = " + idProducto);
+            rs = ps.executeQuery();          
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();           
+            rs.next();
+            precio = rs.getString(1);
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar registros de la tabla producto");
+            System.err.println(ex.getMessage());
+        } 
+        return precio;
+    }        
     
     public void inserta(String tabla, String[] campos, String[] valores) {
         int i;
@@ -125,7 +172,59 @@ public class Compras {
             System.err.println(ex.getMessage());
         }
     }
+    
+    public  String getCurrentDate() {
+       SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy       
+        Date cDate = new Date();
+        String now = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+       return now;
+    }
+    
+    public  String getCurrentHour() {
+        String now;
+        Calendar calendario = Calendar.getInstance();
+        int hora, minutos, segundos;
+        hora =calendario.get(Calendar.HOUR_OF_DAY);
+        minutos = calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND);
+        now = hora + ":" + minutos + ":" + segundos;
+        return now;
+    }
+    
+    public void realizaCompra(String idCliente,String idProducto,String cantidad) {
+        String camposCompra[]   = {"idCliente","idProducto","cantidad","subtotal","fecha","hora"};
+        float subtotal;
+        subtotal = Float.parseFloat(consultaPrecio(idProducto)) * Integer.parseInt(cantidad);
+        String valoresCompra[]  =  {idCliente,idProducto,cantidad,String.valueOf(subtotal),getCurrentDate(),getCurrentHour()};
+        inserta("compra", camposCompra, valoresCompra);        
+    }
 
+    public void eliminaRegistros() {
+        elimina("compra","idCliente" , "1");
+        elimina("compra","idCliente" , "2");
+        
+        elimina("fabricanteproducto","idFabricante" , "1");
+        elimina("fabricanteproducto","idFabricante" , "2");
+        elimina("fabricanteproducto","idFabricante" , "3");
+        
+        elimina("cliente","idCliente" , "1");
+        elimina("cliente","idCliente" , "2");
+        
+        elimina("fabricante","idFabricante" , "1");
+        elimina("fabricante","idFabricante" , "2");
+        elimina("fabricante","idFabricante" , "3");
+        
+        elimina("categoriaproducto","idCategoriaProducto" , "1");
+        elimina("categoriaproducto","idCategoriaProducto" , "2");
+        elimina("categoriaproducto","idCategoriaProducto" , "3");   
+        
+        elimina("producto","idProducto" , "1");
+        elimina("producto","idProducto" , "2");
+        elimina("producto","idProducto" , "3");
+        elimina("producto","idProducto" , "4");
+        elimina("producto","idProducto" , "5");
+        elimina("producto","idProducto" , "6");
+    }
     /**
      * @param args the command line arguments
      */
@@ -161,7 +260,7 @@ public class Compras {
         String valoresProducto2[] = {"2","Sala derby new marfil","Sala Tapizada en piel natural","44000","6","1"};  
         String valoresProducto3[] = {"3","Antecomedor capuccino","Moderno antecomedor, mesa con cubierta de cristal","13200","2","2"}; 
         String valoresProducto4[] = {"4","Comedor oleg nogal","Comedor estilo nórdico, fabricado en madera de pino","25400","5","2"};          
-        String valoresProducto5[] = {"5","Cama Nuria gris","King size, madera","23000","1","3"};
+        String valoresProducto5[] = {"5","Cama Nuria gris","King size, madera","23000","5","3"};
         String valoresProducto6[] = {"6","Cama odisey velvet","King size, madera, chapa natural","15600","2","3"}; 
         
         compras.inserta("producto", camposProducto, valoresProducto); 
@@ -206,45 +305,21 @@ public class Compras {
         compras.consulta("cliente");
         System.out.println("------------------------------------------------------------\n"); 
         
-        compras.elimina("fabricanteproducto","idFabricante" , "1");
-        compras.elimina("fabricanteproducto","idFabricante" , "2");
-        compras.elimina("fabricanteproducto","idFabricante" , "3");
         
-        compras.elimina("cliente","idCliente" , "1");
-        compras.elimina("cliente","idCliente" , "2");
+        compras.realizaCompra("1","4","2");  // idCliente idProducto cantidad   
+        compras.realizaCompra("1","6","3");
+        compras.realizaCompra("1","2","1");
         
-        compras.elimina("fabricante","idFabricante" , "1");
-        compras.elimina("fabricante","idFabricante" , "2");
-        compras.elimina("fabricante","idFabricante" , "3");
+        compras.realizaCompra("2","6","2");
+        compras.realizaCompra("2","5","4");
+        //compras.consulta("compra");
+        compras.consultaCompra("1");
+        compras.consultaCompra("2");
         
-        compras.elimina("categoriaproducto","idCategoriaProducto" , "1");
-        compras.elimina("categoriaproducto","idCategoriaProducto" , "2");
-        compras.elimina("categoriaproducto","idCategoriaProducto" , "3");   
+        compras.eliminaRegistros();
+                     
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7        
         
-        compras.elimina("producto","idProducto" , "1");
-        compras.elimina("producto","idProducto" , "2");
-        compras.elimina("producto","idProducto" , "3");
-        compras.elimina("producto","idProducto" , "4");
-        compras.elimina("producto","idProducto" , "5");
-        compras.elimina("producto","idProducto" , "6");
-        
-        
-        
-        
-//        compras.consulta("Producto");
-//        String campos[] = {"idProducto", "nombre", "descripcion", "precioUnitario", "existencias", "idCategoriaProducto"};
-//        String valores[] = {"3", "Escultura de perro azteca", "Escultura en cobre del clásico perro azteca", "250.15", "999", "1"};
-//        compras.inserta("Producto", campos, valores);
-//        compras.consulta("Producto");
-//        campos = new String[]{"idProducto", "nombre", "descripcion", "precioUnitario"};
-//        valores = new String[]{"3", "Escultura en miniatura de perro azteca", "Escultura mini en bronce del clásico perro azteca", "295.85"};
-//        compras.actualiza("Producto", campos, valores, "3");
-//        compras.consulta("Producto");
-//        compras.elimina("Producto", "idProducto", "3");
-//        compras.consulta("Producto");
-        compras.cierra();
-        
-        
-        
+        compras.cierra();                        
     }    
 }
