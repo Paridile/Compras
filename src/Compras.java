@@ -17,10 +17,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-/**
- *
- * @author Héctor Rafael Orozco Aguirre
- */
 public class Compras {
     private Connection connection;
     private ResultSet rs;
@@ -86,6 +82,7 @@ public class Compras {
                 }
                 System.out.println("");
             }
+            sumaTotal(id);
             System.out.println("------------------------------------------------------------\n"); 
         } catch (SQLException ex) {
             System.err.println("Error al consultar registros de la tabla compra");
@@ -198,6 +195,22 @@ public class Compras {
         String valoresCompra[]  =  {idCliente,idProducto,cantidad,String.valueOf(subtotal),getCurrentDate(),getCurrentHour()};
         inserta("compra", camposCompra, valoresCompra);        
     }
+    
+    public void sumaTotal(String idCliente) {
+        String total;
+        try {
+            ps = connection.prepareStatement("SELECT SUM(subtotal) FROM compra WHERE idCliente = " + idCliente);
+            rs = ps.executeQuery();          
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();           
+            rs.next();
+            total = rs.getString(1);
+            System.out.println("\nEl total el cliente " + idCliente + " es " + total + "\n");
+        } catch (SQLException ex) {
+            System.err.println("Error al consultar registros de la tabla producto");
+            System.err.println(ex.getMessage());
+        } 
+    }
 
     public void eliminaRegistros() {
         elimina("compra","idCliente" , "1");
@@ -302,7 +315,7 @@ public class Compras {
         String valoresCliente2[]  = {"2","Ezequias Mendoza Martín","A5GGE986933","5535745335","Gorchs No. 345","mendoza@mail.com"};
         compras.inserta("cliente", camposCliente, valoresCliente);
         compras.inserta("cliente", camposCliente, valoresCliente2);
-        compras.consulta("cliente");
+        compras.consulta("cliente"); 
         System.out.println("------------------------------------------------------------\n"); 
         
         
@@ -312,13 +325,11 @@ public class Compras {
         
         compras.realizaCompra("2","6","2");
         compras.realizaCompra("2","5","4");
-        //compras.consulta("compra");
+
         compras.consultaCompra("1");
         compras.consultaCompra("2");
         
-        compras.eliminaRegistros();
-                     
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7        
+        //compras.eliminaRegistros();      
         
         compras.cierra();                        
     }    
