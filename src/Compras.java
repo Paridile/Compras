@@ -246,7 +246,7 @@ public class Compras {
         compras.inserta("fabricante", camposFabricante, valoresFabricante2);
         compras.inserta("fabricante", camposFabricante, valoresFabricante3);
         
-        //Insercion de favricantes
+        //Insercion de fabricantes
         compras.inserta("fabricante", camposFabricante, valoresFabricante4); 
         compras.inserta("fabricante", camposFabricante, valoresFabricante5);
         compras.inserta("fabricante", camposFabricante, valoresFabricante6);
@@ -337,18 +337,39 @@ public class Compras {
         String valoresFabricanteProducto2[]  = {"2","4"}; 
         String valoresFabricanteProducto3[]  = {"3","5"}; 
         String valoresFabricanteProducto4[]  = {"1","6"}; 
+        
+        String valoresFabricanteProducto5[]  = {"4","7"}; 
+        String valoresFabricanteProducto6[]  = {"5","10"}; 
+        String valoresFabricanteProducto7[]  = {"6","11"}; 
+        String valoresFabricanteProducto8[]  = {"6","12"};
+        
         compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto);
         compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto2);
         compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto3);
         compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto4);
+        
+        compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto5);
+        compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto6);
+        compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto7);
+        compras.inserta("fabricanteproducto", camposFabricanteProducto, valoresFabricanteProducto8);
+        
         compras.consulta("fabricanteproducto");
         System.out.println("------------------------------------------------------------\n"); 
         
         String camposCliente[]  = {"idCliente","nombreCompleto","RFC","telefono","direccion","email"};
         String valoresCliente[]   = {"1","Gustavo R. Vidriales Mireles","G9BGA996933","5534874587","Privada Pamo No. 287","gustavo@mail.com"};
         String valoresCliente2[]  = {"2","Ezequias Mendoza Martín","A5GGE986933","5535745335","Gorchs No. 345","mendoza@mail.com"};
+        
+        //Clientes agregados por Uriel
+        String valoresCliente3[]  = {"3","Gabriel Montiel Matias","GMMGA786312","5555444412","Privada Pamo No. 27","werever@mail.com"};
+        String valoresCliente4[]  = {"4","Federico Lobezno Gonzalez","FLGGE766512","5555444413","Privada Lomos No. 35","fedelobo@mail.com"};
+        
         compras.inserta("cliente", camposCliente, valoresCliente);
         compras.inserta("cliente", camposCliente, valoresCliente2);
+        
+        compras.inserta("cliente", camposCliente, valoresCliente3);
+        compras.inserta("cliente", camposCliente, valoresCliente4);
+        
         compras.consulta("cliente");
         System.out.println("------------------------------------------------------------\n"); 
         
@@ -359,9 +380,19 @@ public class Compras {
         
         compras.realizaCompra("2","6","2");
         compras.realizaCompra("2","5","4");
+        
+        compras.realizaCompra("3","7","5");
+        compras.realizaCompra("3","11","1");
+        
+        compras.realizaCompra("4","10","2");
+        compras.realizaCompra("4","12","3");
+        
         //compras.consulta("compra");
         compras.consultaCompra("1");
         compras.consultaCompra("2");
+        
+        compras.consultaCompra("3");
+        compras.consultaCompra("4");
         
         compras.eliminaRegistros();
                      
