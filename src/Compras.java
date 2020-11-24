@@ -237,9 +237,20 @@ public class Compras {
         String valoresFabricante2[] = {"2","IKEA","CDMX", "55111111","famsa@mail.com","famsa.com","Pedro Perez","PPDS901107AF"}; 
         String valoresFabricante3[] = {"3","Casa de las lomas","Tlalnepantla", "55773355","casa@mail.com","casadelaslomas.com","Jose Juarez","JJDS901107AF"}; 
         
+        //Fabricantes insertados por Uriel
+        String valoresFabricante4[] = {"4","Pantoma","Naucalpan, Mex", "55555556","pantoma@mail.com","pantoma.com","Lopez Matias","LMDS781005MU"};  
+        String valoresFabricante5[] = {"5","Miss Olas","Madero, Acapulco", "5555557","olas.66@mail.com","olasradicales.com","Pablo Flores","PFDS4541105QW"}; 
+        String valoresFabricante6[] = {"6","Articfox","Atizapan", "55555558","coloritos777@mail.com","articfox.com","Fernanda Juarez","FJDS981109XD"}; 
+        
         compras.inserta("fabricante", camposFabricante, valoresFabricante); 
         compras.inserta("fabricante", camposFabricante, valoresFabricante2);
         compras.inserta("fabricante", camposFabricante, valoresFabricante3);
+        
+        //Insercion de favricantes
+        compras.inserta("fabricante", camposFabricante, valoresFabricante4); 
+        compras.inserta("fabricante", camposFabricante, valoresFabricante5);
+        compras.inserta("fabricante", camposFabricante, valoresFabricante6);
+        
         compras.consulta("fabricante");
         System.out.println("------------------------------------------------------------\n");
         
@@ -248,9 +259,18 @@ public class Compras {
         String valoresCategoria2[] = {"2","Comedores","Juego de sillas y mesa"};  
         String valoresCategoria3[] = {"3","Camas","Base para cama"};  
         
+        //Categorias insertados por Uriel
+        String valoresCategoria4[] = {"4","Cobijas","Cobijas de tigre"};          
+        String valoresCategoria5[] = {"5","Tabas de surf","Tablas para surfear"};  
+        String valoresCategoria6[] = {"6","Tintes","BTintes para cabello"};
+        
         compras.inserta("categoriaproducto", camposCategoria, valoresCategoria); 
         compras.inserta("categoriaproducto", camposCategoria, valoresCategoria2);
         compras.inserta("categoriaproducto", camposCategoria, valoresCategoria3);
+        
+        compras.inserta("categoriaproducto", camposCategoria, valoresCategoria4); 
+        compras.inserta("categoriaproducto", camposCategoria, valoresCategoria5);
+        compras.inserta("categoriaproducto", camposCategoria, valoresCategoria6);
         
         compras.consulta("categoriaproducto");
         System.out.println("------------------------------------------------------------\n");   
@@ -263,6 +283,14 @@ public class Compras {
         String valoresProducto5[] = {"5","Cama Nuria gris","King size, madera","23000","5","3"};
         String valoresProducto6[] = {"6","Cama odisey velvet","King size, madera, chapa natural","15600","2","3"}; 
         
+        //Productos ingresdos por Uriel
+        String valoresProducto7[] = {"7","Cobija tigre","Cobija abrigadora de tigre","520","100","4"};          
+        String valoresProducto8[] = {"8","Cobija leon","Cobija abrigadora de leon","540","100","4"};  
+        String valoresProducto9[] = {"9","Minitabla","Tabla para niños","2420","100","5"}; 
+        String valoresProducto10[] = {"10","Tabla tiburon","Tabla con estampado de tiburon","3640","100","5"};          
+        String valoresProducto11[] = {"11","Tinte blanco","Tinte para tener canas","150","100","6"};
+        String valoresProducto12[] = {"12","Tinte rojo","Tinte para ser pelirrojo","156","100","6"}; 
+        
         compras.inserta("producto", camposProducto, valoresProducto); 
         compras.inserta("producto", camposProducto, valoresProducto2);
         compras.inserta("producto", camposProducto, valoresProducto3);
@@ -270,18 +298,37 @@ public class Compras {
         compras.inserta("producto", camposProducto, valoresProducto5);
         compras.inserta("producto", camposProducto, valoresProducto6);
         
+        compras.inserta("producto", camposProducto, valoresProducto7); 
+        compras.inserta("producto", camposProducto, valoresProducto8);
+        compras.inserta("producto", camposProducto, valoresProducto9);
+        compras.inserta("producto", camposProducto, valoresProducto10);
+        compras.inserta("producto", camposProducto, valoresProducto11);
+        compras.inserta("producto", camposProducto, valoresProducto12);
+        
         compras.consulta("producto");
         System.out.println("------------------------------------------------------------\n");  
         
         String valoresProductomod[]   = {"1","Sala bari rojo","Sala esquinera de estilo contemporáneo, 2 sillones","20000","2","1"}; 
         String valoresProductomod2[]  = {"5","Cama Nuria verde","Matrimonial, madera","10000","2","3"}; 
+        
+        String valoresProductomod3[]   = {"8","Cobija gato","Cobija abrigadora de gato","670","100","4"}; 
+        String valoresProductomod4[]  = {"12","Tinte cafe","Tinte para ser verse joven","170","100","6"}; 
+        
         compras.actualiza("Producto", camposProducto, valoresProductomod, "1");
         compras.actualiza("Producto", camposProducto, valoresProductomod2, "5");
+        
+        compras.actualiza("Producto", camposProducto, valoresProductomod3, "8");
+        compras.actualiza("Producto", camposProducto, valoresProductomod4, "12");
+        
         compras.consulta("producto");
         System.out.println("------------------------------------------------------------\n"); 
         
         compras.elimina("producto","idProducto" , "1");
-        compras.elimina("producto","idProducto" , "3");        
+        compras.elimina("producto","idProducto" , "3");  
+        
+        compras.elimina("producto","idProducto" , "8");
+        compras.elimina("producto","idProducto" , "9");  
+        
         compras.consulta("producto");
         System.out.println("------------------------------------------------------------\n"); 
                 
